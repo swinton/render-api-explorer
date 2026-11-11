@@ -4,7 +4,7 @@ Explore Render's API in [Yaak](https://yaak.app), starting with **Build Reuse**:
 
 [![Run in Yaak](https://yaak.app/static/button.svg)](https://yaak.app/button/run?name=Render%20Build%20Reuse&url=https%3A%2F%2Fraw.githubusercontent.com%2Fswinton%2Frender-api-explorer%2Fmain%2Fcollections%2Fbuild-reuse.yaak.json)
 
-The button requires a publicly accessible collection at `swinton/render-api-explorer` on the `main` branch. While this repository is private, clone it and import the local file below.
+Click **Run in Yaak** to import the Build Reuse collection. You can also clone this repository and import the local file below.
 
 Build Reuse is in [limited early access](https://render.com/docs/build-reuse). Your Render workspace needs access, and the API may change. This community project is not affiliated with Render or Yaak.
 
