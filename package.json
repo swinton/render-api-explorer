@@ -1,0 +1,15 @@
+{
+  "name": "render-api-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Render API requests for Yaak, starting with Build Reuse",
+  "type": "module",
+  "license": "ISC",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "check": "node scripts/generate.mjs --check",
+    "test": "node --test",
+    "update:spec": "node scripts/update-spec.mjs"
+  }
+}

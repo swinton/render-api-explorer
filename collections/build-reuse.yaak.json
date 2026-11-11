@@ -1,0 +1,1343 @@
+{
+  "yaakSchema": 5,
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "GENERATE_ID::render_workspace_build_reuse",
+        "name": "Render · Build Reuse",
+        "description": "Share one Git build across multiple services. Early access API. See README.md for setup.",
+        "authenticationType": "bearer",
+        "authentication": {
+          "token": "${[ renderApiKey ]}"
+        },
+        "headers": []
+      }
+    ],
+    "environments": [
+      {
+        "model": "environment",
+        "id": "GENERATE_ID::render_environment_base",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "name": "Global Variables",
+        "parentModel": "workspace",
+        "parentId": null,
+        "public": true,
+        "variables": [
+          {
+            "name": "baseUrl",
+            "value": "https://api.render.com/v1",
+            "enabled": true
+          },
+          {
+            "name": "renderApiKey",
+            "value": "",
+            "enabled": true
+          },
+          {
+            "name": "ownerId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "repoUrl",
+            "value": "https://github.com/REPLACE_ME/REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "branch",
+            "value": "main",
+            "enabled": true
+          },
+          {
+            "name": "runtime",
+            "value": "node",
+            "enabled": true
+          },
+          {
+            "name": "region",
+            "value": "oregon",
+            "enabled": true
+          },
+          {
+            "name": "buildCommand",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "buildSourceName",
+            "value": "shared-git-build",
+            "enabled": true
+          },
+          {
+            "name": "buildSourceId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "buildId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "serviceAId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "serviceBId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "serviceId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "envVarKey",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "envGroupId",
+            "value": "REPLACE_ME",
+            "enabled": true
+          },
+          {
+            "name": "cursor",
+            "value": "",
+            "enabled": true
+          },
+          {
+            "name": "limit",
+            "value": "20",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_quickstart",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "01 · Share one Git build",
+        "description": "Run requests individually in order. Read README.md first. Set private credentials and edit placeholders. Linking services changes their build configuration.",
+        "sortPriority": 0,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_services_and_deploys",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Services and deploys",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 1,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_build_sources",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Build sources",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 2,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_builds",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Builds",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 3,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_build_environment_variables",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Build environment variables",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 4,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_build_secret_files",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Build secret files",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 5,
+        "authenticationType": null,
+        "authentication": {}
+      },
+      {
+        "model": "folder",
+        "id": "GENERATE_ID::render_folder_build_environment_groups",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": null,
+        "name": "Reference · Build environment groups",
+        "description": "API reference. Edit example bodies and variables before sending.",
+        "sortPriority": 6,
+        "authenticationType": null,
+        "authentication": {}
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_services",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "01 · Find your services",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services",
+        "urlParameters": [
+          {
+            "name": "name",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "type",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "environmentId",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "env",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "region",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "suspended",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "ownerId",
+            "value": "${[ ownerId ]}",
+            "enabled": true
+          },
+          {
+            "name": "includePreviews",
+            "value": "true",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 0,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Choose two supported services in the same workspace and region. Set serviceAId and serviceBId. Preserve their existing build configuration for recovery.\n\nList services matching the provided filters. If no filters are provided, returns all services you have permissions to view.\n\n\nReference: https://api-docs.render.com/reference/list-services"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_inspect_A",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "02A · Inspect service A",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceAId ]}",
+        "urlParameters": [],
+        "sortPriority": 1,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Confirm region, runtime, start command, runtime environment, and auto-deploy settings before linking.\n\nRetrieve the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/retrieve-service"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_inspect_B",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "02B · Inspect service B",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceBId ]}",
+        "urlParameters": [],
+        "sortPriority": 2,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Confirm region, runtime, start command, runtime environment, and auto-deploy settings before linking.\n\nRetrieve the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/retrieve-service"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_create",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "03 · Create a Git build source",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/build-sources",
+        "urlParameters": [],
+        "sortPriority": 3,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"ownerId\": \"${[ ownerId ]}\",\n  \"name\": \"${[ buildSourceName ]}\",\n  \"git\": {\n    \"repoUrl\": \"${[ repoUrl ]}\",\n    \"branch\": \"${[ branch ]}\",\n    \"runtime\": \"${[ runtime ]}\",\n    \"region\": \"${[ region ]}\",\n    \"buildCommand\": \"${[ buildCommand ]}\"\n  }\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Edit runtime, region, repoUrl, branch, and buildCommand first. Copy response.id to buildSourceId. This example does not link services during creation.\n\nCreate a build source that can be linked to one or more\nservices in the same workspace.\n\nExactly one of `git` or `image` must be set:\n- `git`: the build source is git-backed. The code is built in\n   the requested `region` (defaults to `oregon`).\n- `image`: the build source is image-backed. It points at an\n  existing image in an external registry; no build is performed.\n\n`envVars`, `secretFiles`, and `envGroupIds` set the build-time\nenvironment and are only valid for `git` sources; the request fails\nif any are provided with `image`.\n\n\nReference: https://api-docs.render.com/reference/create-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_env",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "04 · Check build-time environment",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars",
+        "urlParameters": [
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 4,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Optional: configure required build variables, secret files, or environment groups using the reference folders before linking. Service runtime variables are separate.\n\nList all environment variables for the build source with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/get-env-vars-for-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_link_A",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "05A · Link service A",
+        "method": "PATCH",
+        "url": "${[ baseUrl ]}/services/${[ serviceAId ]}",
+        "urlParameters": [],
+        "sortPriority": 5,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildSourceId\": \"${[ buildSourceId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Run only after inspecting this service. This minimal body retains an existing native start command. If missing, add serviceDetails.startCommand for this service; Docker sources reject a start command.\n\nUpdate the service with the provided ID.\n\n400 with `code: build_source_region_mismatch` if `buildSourceId` names a git-backed\nBuild Source in a different region than the service.\n\n\nReference: https://api-docs.render.com/reference/update-service\n\nLinks an existing service and replaces its build configuration. Confirm matching workspace and region, compatible runtime, and an existing start command for native runtimes. Do not include other build settings."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_link_B",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "05B · Link service B",
+        "method": "PATCH",
+        "url": "${[ baseUrl ]}/services/${[ serviceBId ]}",
+        "urlParameters": [],
+        "sortPriority": 6,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildSourceId\": \"${[ buildSourceId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Run only after inspecting this service. This minimal body retains an existing native start command. If missing, add serviceDetails.startCommand for this service; Docker sources reject a start command.\n\nUpdate the service with the provided ID.\n\n400 with `code: build_source_region_mismatch` if `buildSourceId` names a git-backed\nBuild Source in a different region than the service.\n\n\nReference: https://api-docs.render.com/reference/update-service\n\nLinks an existing service and replaces its build configuration. Confirm matching workspace and region, compatible runtime, and an existing start command for native runtimes. Do not include other build settings."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_trigger",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "06 · Trigger the shared build",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/builds",
+        "urlParameters": [],
+        "sortPriority": 7,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"clearCache\": \"do_not_clear\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Starts a new build even if one already exists. Copy response.id (not buildRun.id) to buildId. Linked services with auto-deploy enabled deploy the result.\n\nStart a new build of the build source at the current HEAD of its\nbranch, even if an up-to-date build already exists. Services linked to\nthe build source with autodeploy enabled are deployed with the result.\n\nUpdating a build source or its build-time environment (env vars,\nsecret files, env groups) with the REST API does not build it. Call\nthis endpoint after those changes to build them.\n\nOnly `git` build sources can be built.\n\n\nReference: https://api-docs.render.com/reference/trigger-build-source-build"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_inspect_build",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "07 · Check build status",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/builds/${[ buildId ]}",
+        "urlParameters": [],
+        "sortPriority": 8,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Repeat manually until buildRun.status is succeeded. If failed or canceled, inspect the build logs in Render before continuing.\n\nRetrieve a build of a build source, including its status.\n\n\nReference: https://api-docs.render.com/reference/retrieve-build-source-build"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_deploy_A",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "08A · Deploy shared build to A (optional)",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/services/${[ serviceAId ]}/deploys",
+        "urlParameters": [],
+        "sortPriority": 9,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildId\": \"${[ buildId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Only needed for manual deployment. Wait for the selected build to succeed. Both requests use the same buildId. Skip if auto-deploy already deployed it.\n\nTrigger a deploy for the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/create-deploy"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_verify_A",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "09A · Inspect deploys for A",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceAId ]}/deploys",
+        "urlParameters": [
+          {
+            "name": "status",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 10,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Inspect the latest deploy status and check the service in Render.\n\nList deploys matching the provided filters. If no filters are provided, all deploys for the service are returned.\n\n\nReference: https://api-docs.render.com/reference/list-deploys"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_deploy_B",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "08B · Deploy shared build to B (optional)",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/services/${[ serviceBId ]}/deploys",
+        "urlParameters": [],
+        "sortPriority": 11,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildId\": \"${[ buildId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Only needed for manual deployment. Wait for the selected build to succeed. Both requests use the same buildId. Skip if auto-deploy already deployed it.\n\nTrigger a deploy for the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/create-deploy"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_quickstart_verify_B",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_quickstart",
+        "name": "09B · Inspect deploys for B",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceBId ]}/deploys",
+        "urlParameters": [
+          {
+            "name": "status",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 12,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Inspect the latest deploy status and check the service in Render.\n\nList deploys matching the provided filters. If no filters are provided, all deploys for the service are returned.\n\n\nReference: https://api-docs.render.com/reference/list-deploys"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_list-services",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_services_and_deploys",
+        "name": "GET · List services",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services",
+        "urlParameters": [
+          {
+            "name": "name",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "type",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "environmentId",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "env",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "region",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "suspended",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "ownerId",
+            "value": "${[ ownerId ]}",
+            "enabled": true
+          },
+          {
+            "name": "includePreviews",
+            "value": "true",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 13,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List services matching the provided filters. If no filters are provided, returns all services you have permissions to view.\n\n\nReference: https://api-docs.render.com/reference/list-services"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_retrieve-service",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_services_and_deploys",
+        "name": "GET · Retrieve service",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceId ]}",
+        "urlParameters": [],
+        "sortPriority": 14,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Retrieve the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/retrieve-service"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_update-service",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_services_and_deploys",
+        "name": "PATCH · Update service",
+        "method": "PATCH",
+        "url": "${[ baseUrl ]}/services/${[ serviceId ]}",
+        "urlParameters": [],
+        "sortPriority": 15,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildSourceId\": \"${[ buildSourceId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Update the service with the provided ID.\n\n400 with `code: build_source_region_mismatch` if `buildSourceId` names a git-backed\nBuild Source in a different region than the service.\n\n\nReference: https://api-docs.render.com/reference/update-service\n\nLinks an existing service and replaces its build configuration. Confirm matching workspace and region, compatible runtime, and an existing start command for native runtimes. Do not include other build settings."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_list-deploys",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_services_and_deploys",
+        "name": "GET · List deploys",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/services/${[ serviceId ]}/deploys",
+        "urlParameters": [
+          {
+            "name": "status",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "finishedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 16,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List deploys matching the provided filters. If no filters are provided, all deploys for the service are returned.\n\n\nReference: https://api-docs.render.com/reference/list-deploys"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_create-deploy",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_services_and_deploys",
+        "name": "POST · Trigger deploy",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/services/${[ serviceId ]}/deploys",
+        "urlParameters": [],
+        "sortPriority": 17,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"buildId\": \"${[ buildId ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Trigger a deploy for the service with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/create-deploy"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_create-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_sources",
+        "name": "POST · Create a build source",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/build-sources",
+        "urlParameters": [],
+        "sortPriority": 18,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"ownerId\": \"${[ ownerId ]}\",\n  \"name\": \"${[ buildSourceName ]}\",\n  \"git\": {\n    \"repoUrl\": \"${[ repoUrl ]}\",\n    \"branch\": \"${[ branch ]}\",\n    \"runtime\": \"${[ runtime ]}\",\n    \"region\": \"${[ region ]}\",\n    \"buildCommand\": \"${[ buildCommand ]}\"\n  }\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Create a build source that can be linked to one or more\nservices in the same workspace.\n\nExactly one of `git` or `image` must be set:\n- `git`: the build source is git-backed. The code is built in\n   the requested `region` (defaults to `oregon`).\n- `image`: the build source is image-backed. It points at an\n  existing image in an external registry; no build is performed.\n\n`envVars`, `secretFiles`, and `envGroupIds` set the build-time\nenvironment and are only valid for `git` sources; the request fails\nif any are provided with `image`.\n\n\nReference: https://api-docs.render.com/reference/create-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_list-build-sources",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_sources",
+        "name": "GET · List build sources",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources",
+        "urlParameters": [
+          {
+            "name": "name",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "ownerId",
+            "value": "${[ ownerId ]}",
+            "enabled": true
+          },
+          {
+            "name": "projectId",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "includePreviews",
+            "value": "true",
+            "enabled": false
+          },
+          {
+            "name": "createdBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "createdAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedBefore",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "updatedAfter",
+            "value": "REPLACE_ME",
+            "enabled": false
+          },
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 19,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List build sources matching the provided filters. If `ownerId` is\nomitted, returns build sources across every workspace you can view.\n\n\nReference: https://api-docs.render.com/reference/list-build-sources"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_get-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_sources",
+        "name": "GET · Retrieve a build source",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}",
+        "urlParameters": [],
+        "sortPriority": 20,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Retrieve a shared build source by ID\n\n\nReference: https://api-docs.render.com/reference/get-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_update-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_sources",
+        "name": "PATCH · Update a build source",
+        "method": "PATCH",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}",
+        "urlParameters": [],
+        "sortPriority": 21,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"name\": \"${[ buildSourceName ]}\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Update a shared build source. Each top-level field is a true patch,\nunset fields are left unchanged.\n\nSupplying `git` or `image` can change the build source's\nunderlying identity:\n- `image` on a git-backed build source switches it to image-backed\n- `git` on an image-backed build source switches it to git-backed\n- `git` on a build source that's already git-backed is a pure\n  patch onto the existing config\n\n\nReference: https://api-docs.render.com/reference/update-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_delete-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_sources",
+        "name": "DELETE · Delete a build source",
+        "method": "DELETE",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}",
+        "urlParameters": [],
+        "sortPriority": 22,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Delete the build source with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/delete-build-source\n\nDestructive: review the target before sending. A build source must have no linked services before deletion."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_list-builds-in-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_builds",
+        "name": "GET · List builds in a build source",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/builds",
+        "urlParameters": [
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 23,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List builds in a build source, newest first. Pass the last item's\n`cursor` as the `cursor` parameter to fetch the next page.\n\n\nReference: https://api-docs.render.com/reference/list-builds-in-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_trigger-build-source-build",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_builds",
+        "name": "POST · Trigger a build",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/builds",
+        "urlParameters": [],
+        "sortPriority": 24,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"clearCache\": \"do_not_clear\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Start a new build of the build source at the current HEAD of its\nbranch, even if an up-to-date build already exists. Services linked to\nthe build source with autodeploy enabled are deployed with the result.\n\nUpdating a build source or its build-time environment (env vars,\nsecret files, env groups) with the REST API does not build it. Call\nthis endpoint after those changes to build them.\n\nOnly `git` build sources can be built.\n\n\nReference: https://api-docs.render.com/reference/trigger-build-source-build"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_retrieve-build-source-build",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_builds",
+        "name": "GET · Retrieve a build",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/builds/${[ buildId ]}",
+        "urlParameters": [],
+        "sortPriority": 25,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Retrieve a build of a build source, including its status.\n\n\nReference: https://api-docs.render.com/reference/retrieve-build-source-build"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_get-env-vars-for-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_variables",
+        "name": "GET · List environment variables",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars",
+        "urlParameters": [
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 26,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List all environment variables for the build source with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/get-env-vars-for-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_update-env-vars-for-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_variables",
+        "name": "PUT · Update environment variables",
+        "method": "PUT",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars",
+        "urlParameters": [],
+        "sortPriority": 27,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "[\n  {\n    \"key\": \"REPLACE_ME\",\n    \"value\": \"REPLACE_ME\"\n  }\n]"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Replace all environment variables for a build source with the provided list of environment variables.\n\nReference: https://api-docs.render.com/reference/update-env-vars-for-build-source\n\nReplaces the entire collection. Retrieve existing values first and include all entries you want to keep. Trigger a build afterward."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_retrieve-build-source-env-var",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_variables",
+        "name": "GET · Retrieve environment variable",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 28,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Retrieve a particular environment variable for a particular build source.\n\nThis only applies to environment variables set directly on the build source, not to environment variables in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/retrieve-build-source-env-var"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_update-build-source-env-var",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_variables",
+        "name": "PUT · Add or update environment variable",
+        "method": "PUT",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 29,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"value\": \"REPLACE_ME\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Add or update a particular environment variable for a particular build source.\n\nThis only applies to environment variables set directly on the build source, not to environment variables in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/update-build-source-env-var"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_delete-build-source-env-var",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_variables",
+        "name": "DELETE · Delete environment variable",
+        "method": "DELETE",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-vars/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 30,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Delete a particular environment variable from a particular build source.\n\nThis only applies to environment variables set directly on the build source, not to environment variables in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/delete-build-source-env-var\n\nDestructive: review the target before sending. A build source must have no linked services before deletion."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_list-secret-files-for-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_secret_files",
+        "name": "GET · List secret files",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/secret-files",
+        "urlParameters": [
+          {
+            "name": "cursor",
+            "value": "${[ cursor ]}",
+            "enabled": false
+          },
+          {
+            "name": "limit",
+            "value": "${[ limit ]}",
+            "enabled": true
+          }
+        ],
+        "sortPriority": 31,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "List all secret files for the build source with the provided ID.\n\n\nReference: https://api-docs.render.com/reference/list-secret-files-for-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_update-secret-files-for-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_secret_files",
+        "name": "PUT · Update secret files",
+        "method": "PUT",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/secret-files",
+        "urlParameters": [],
+        "sortPriority": 32,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "[\n  {\n    \"name\": \"REPLACE_ME\",\n    \"content\": \"REPLACE_ME\"\n  }\n]"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Replace all secret files for a build source with the provided list of secret files.\n\n**Any of the build source's existing secret files not included in this request will be deleted.**\n\nThis only applies to secret files set directly on the build source, not to secret files in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/update-secret-files-for-build-source\n\nReplaces the entire collection. Retrieve existing values first and include all entries you want to keep. Trigger a build afterward."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_retrieve-build-source-secret-file",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_secret_files",
+        "name": "GET · Retrieve secret file",
+        "method": "GET",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/secret-files/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 33,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Retrieve a particular secret file for a particular build source.\n\nThis only applies to secret files set directly on the build source, not to secret files in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/retrieve-build-source-secret-file"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_add-or-update-build-source-secret-file",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_secret_files",
+        "name": "PUT · Add or update secret file",
+        "method": "PUT",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/secret-files/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 34,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": "application/json",
+        "body": {
+          "text": "{\n  \"content\": \"REPLACE_ME\"\n}"
+        },
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "description": "Add or update a particular secret file for a particular build source.\n\nThis only applies to secret files set directly on the build source, not to secret files in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/add-or-update-build-source-secret-file"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_delete-build-source-secret-file",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_secret_files",
+        "name": "DELETE · Delete secret file",
+        "method": "DELETE",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/secret-files/${[ envVarKey ]}",
+        "urlParameters": [],
+        "sortPriority": 35,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Delete a particular secret file from a particular build source.\n\nThis only applies to secret files set directly on the build source, not to secret files in a linked environment group.\n\n\nReference: https://api-docs.render.com/reference/delete-build-source-secret-file\n\nDestructive: review the target before sending. A build source must have no linked services before deletion."
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_link-env-group-to-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_groups",
+        "name": "POST · Link environment group",
+        "method": "POST",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-groups/${[ envGroupId ]}",
+        "urlParameters": [],
+        "sortPriority": 36,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Link a particular environment group to a particular build source.\n\nThe build source will have access to the environment variables and secret files in the group at build time.\n\n\nReference: https://api-docs.render.com/reference/link-env-group-to-build-source"
+      },
+      {
+        "model": "http_request",
+        "id": "GENERATE_ID::render_request_unlink-env-group-from-build-source",
+        "workspaceId": "GENERATE_ID::render_workspace_build_reuse",
+        "folderId": "GENERATE_ID::render_folder_build_environment_groups",
+        "name": "DELETE · Unlink environment group",
+        "method": "DELETE",
+        "url": "${[ baseUrl ]}/build-sources/${[ buildSourceId ]}/env-groups/${[ envGroupId ]}",
+        "urlParameters": [],
+        "sortPriority": 37,
+        "authenticationType": null,
+        "authentication": {},
+        "bodyType": null,
+        "body": {},
+        "headers": [],
+        "description": "Unlink a particular environment group from a particular build source.\n\nThe build source will lose access to the environment variables and secret files in the group.\n\n\nReference: https://api-docs.render.com/reference/unlink-env-group-from-build-source\n\nDestructive: review the target before sending. A build source must have no linked services before deletion."
+      }
+    ]
+  }
+}
